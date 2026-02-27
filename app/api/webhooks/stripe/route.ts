@@ -117,6 +117,53 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 
+  // Handle charge.succeeded (e.g., from stripe charges create)
+  if (event.type === "charge.succeeded") {
+    const charge = event.data.object as Stripe.Charge;
+    const email = charge.receipt_email;
+
+    console.log(`📧 Processing charge for ${email}`);
+
+    if (!email) {
+      console.error("❌ Charge missing receipt email");
+      console.error("Charge ID:", charge.id);
+      return NextResponse.json({ error: "No email found" }, { status: 400 });
+    }
+
+    try {
+      // Generate license key
+      const licenseKey = generateLicenseKey();
+      console.log(`🔑 Generated license key for ${email}`);
+
+      // Send email
+      await sendLicenseEmail(email, licenseKey);
+
+      // Log for debugging
+      console.log(
+        `✅ Success: License key issued`,
+        JSON.stringify(
+          {
+            email,
+            licenseKey,
+            stripeChargeId: charge.id,
+            timestamp: new Date().toISOString(),
+          },
+          null,
+          2
+        )
+      );
+
+      return NextResponse.json({ success: true });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error("❌ Error processing charge:", errorMessage);
+      return NextResponse.json(
+        { error: "Failed to process license" },
+        { status: 500 }
+      );
+    }
+  }
+
   // Handle payment_intent.succeeded
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
