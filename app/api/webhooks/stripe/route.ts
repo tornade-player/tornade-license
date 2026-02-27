@@ -120,12 +120,22 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Handle payment_intent.succeeded
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
-    const email = paymentIntent.receipt_email;
+
+    // Debug: Log the full payload
+    console.log("🔍 DEBUG: Full PaymentIntent object:", JSON.stringify(paymentIntent, null, 2));
+
+    let email = paymentIntent.receipt_email;
+
+    // Try to get email from charge if not in payment intent
+    if (!email && paymentIntent.charges?.data?.[0]) {
+      email = paymentIntent.charges.data[0].receipt_email || paymentIntent.charges.data[0].billing_details?.email;
+    }
 
     console.log(`📧 Processing payment for ${email}`);
 
     if (!email) {
       console.error("❌ Payment intent missing receipt email");
+      console.error("Payment Intent ID:", paymentIntent.id);
       return NextResponse.json({ error: "No email found" }, { status: 400 });
     }
 
