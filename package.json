@@ -1,5 +1,5 @@
 {
-  "name": "tornade-licence",
+  "name": "tornade-license",
   "version": "1.0.0",
   "description": "Tornade License Server - Stripe webhook handler with license key generation",
   "private": true,

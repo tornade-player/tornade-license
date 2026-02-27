@@ -14,9 +14,9 @@ Complete step-by-step guide to deploy Tornade License Server on Vercel.
 ### If using GitHub CLI:
 
 ```bash
-gh repo create tornade-licence \
+gh repo create tornade-license \
   --private \
-  --source=/Users/thomas/Apps/tornade-licence \
+  --source=/Users/thomas/Apps/tornade-license \
   --remote=origin \
   --push
 ```
@@ -24,14 +24,14 @@ gh repo create tornade-licence \
 ### Or manually:
 
 1. Go to https://github.com/new
-2. Repository name: `tornade-licence`
+2. Repository name: `tornade-license`
 3. Make it **Private**
 4. Create repository
 5. Follow GitHub's instructions to push your local repo
 
 ```bash
-cd /Users/thomas/Apps/tornade-licence
-git remote add origin https://github.com/YOUR_USERNAME/tornade-licence.git
+cd /Users/thomas/Apps/tornade-license
+git remote add origin https://github.com/YOUR_USERNAME/tornade-license.git
 git branch -M main
 git push -u origin main
 ```
@@ -65,7 +65,7 @@ You'll get the webhook secret later.
 
 ```bash
 npm install -g vercel
-cd /Users/thomas/Apps/tornade-licence
+cd /Users/thomas/Apps/tornade-license
 vercel --prod
 ```
 

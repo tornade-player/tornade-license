@@ -29,8 +29,8 @@ Customer receives license key
 ### 1. Clone & Install
 
 ```bash
-git clone git@github.com:tornade-player/tornade-licence.git
-cd tornade-licence
+git clone git@github.com:tornade-player/tornade-license.git
+cd tornade-license
 npm install
 ```
 
@@ -135,7 +135,7 @@ private func validate(key: String) -> Bool {
 ## File Structure
 
 ```
-tornade-licence/
+tornade-license/
 ├── app/
 │   ├── api/
 │   │   └── webhooks/
