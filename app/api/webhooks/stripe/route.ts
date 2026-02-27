@@ -5,8 +5,6 @@ import crypto from "crypto";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const HMAC_SECRET =
   process.env.TORNADE_LICENSE_SECRET || "tornade-license-secret-v1";
 
@@ -44,6 +42,8 @@ async function sendLicenseEmail(
   email: string,
   licenseKey: string
 ): Promise<void> {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     await resend.emails.send({
       from: "Tornade <noreply@tornade.app>",
