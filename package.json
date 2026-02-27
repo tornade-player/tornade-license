@@ -1,0 +1,23 @@
+{
+  "name": "tornade-licence",
+  "version": "1.0.0",
+  "description": "Tornade License Server - Stripe webhook handler with license key generation",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "stripe": "^16.0.0",
+    "resend": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}
