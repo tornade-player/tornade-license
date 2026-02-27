@@ -121,15 +121,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
 
-    // Debug: Log the full payload
-    console.log("🔍 DEBUG: Full PaymentIntent object:", JSON.stringify(paymentIntent, null, 2));
+    // Debug: Log key fields
+    console.log("🔍 DEBUG PaymentIntent:", {
+      id: paymentIntent.id,
+      receipt_email: paymentIntent.receipt_email,
+      customer_email: (paymentIntent.customer as any)?.email,
+      metadata: paymentIntent.metadata,
+    });
 
-    let email = paymentIntent.receipt_email;
-
-    // Try to get email from charge if not in payment intent
-    if (!email && paymentIntent.charges?.data?.[0]) {
-      email = paymentIntent.charges.data[0].receipt_email || paymentIntent.charges.data[0].billing_details?.email;
-    }
+    const email = paymentIntent.receipt_email;
 
     console.log(`📧 Processing payment for ${email}`);
 
