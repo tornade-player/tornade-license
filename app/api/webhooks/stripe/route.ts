@@ -120,6 +120,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Handle checkout.session.completed (from Stripe Checkout)
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+
+    // Debug: Log the full session
+    console.log("🔍 DEBUG FULL SESSION:", JSON.stringify(session, null, 2));
+
     const email = session.customer_email;
 
     console.log(`📧 Processing checkout session for ${email}`);
