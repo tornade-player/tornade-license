@@ -5,10 +5,10 @@ import crypto from "crypto";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
-const HMAC_SECRET = process.env.TORNADE_LICENSE_SECRET;
-if (!HMAC_SECRET) {
+if (!process.env.TORNADE_LICENSE_SECRET) {
   throw new Error("Missing required env var: TORNADE_LICENSE_SECRET");
 }
+const HMAC_SECRET = process.env.TORNADE_LICENSE_SECRET;
 
 /**
  * Generates a Tornade license key in format:
