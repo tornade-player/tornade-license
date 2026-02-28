@@ -34,7 +34,7 @@ export default function SuccessPage() {
           color: "#1a1a1a",
           margin: "0 0 16px 0",
         }}>
-          Payment Successful! ✅
+          Payment Successful
         </h1>
 
         <p style={{
@@ -58,17 +58,25 @@ export default function SuccessPage() {
             color: "#0066cc",
             margin: "0",
           }}>
-            📧 Check your email for the license key and activation instructions.
+            Check your email for the license key and activation instructions.
           </p>
         </div>
 
-        <p style={{
-          fontSize: "14px",
-          color: "#999",
-          margin: "0",
+        <div style={{
+          background: "#fff8e1",
+          border: "1px solid #f0c040",
+          borderRadius: "8px",
+          padding: "16px",
         }}>
-          If you don't see the email, check your spam folder.
-        </p>
+          <p style={{
+            fontSize: "14px",
+            color: "#7a5c00",
+            margin: "0",
+            lineHeight: "1.5",
+          }}>
+            <strong>Did not receive the email?</strong> It may have been filtered into your spam or junk folder. Please check there before contacting support.
+          </p>
+        </div>
 
         <a
           href="https://tornade.tf"

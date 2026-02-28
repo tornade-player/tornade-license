@@ -9,7 +9,7 @@ export default function Home() {
       background: "#f5f5f5",
     }}>
       <div style={{ textAlign: "center", padding: "20px" }}>
-        <h1>🎵 Tornade License Server</h1>
+        <h1>Tornade License Server</h1>
         <p>Stripe webhook handler for license key generation</p>
         <p style={{ color: "#666", fontSize: "14px" }}>
           Webhook endpoint: <code>/api/webhooks/stripe</code>
