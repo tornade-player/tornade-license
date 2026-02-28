@@ -58,8 +58,8 @@ async function sendLicenseEmail(
           <h2 style="text-align: center; margin-top: 0;">Thank You for Your Purchase!</h2>
           <p style="text-align: center; color: #666;">Here is your Tornade license key. Enter it in the app to activate your copy.</p>
 
-          <div style="background: #f5f5f5; border-radius: 8px; padding: 16px; margin: 24px 0; text-align: center;">
-            <code style="font-family: 'Menlo', 'Monaco', monospace; font-size: 16px; font-weight: 500; letter-spacing: 2px;">
+          <div style="background: #f5f5f5; border-radius: 8px; padding: 16px; margin: 24px 0; text-align: center; overflow-x: auto;">
+            <code style="font-family: 'Menlo', 'Monaco', monospace; font-size: 16px; font-weight: 500; letter-spacing: 2px; white-space: nowrap; display: inline-block;">
               ${licenseKey}
             </code>
           </div>
