@@ -121,10 +121,17 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (event.type === "charge.succeeded") {
     const charge = event.data.object as Stripe.Charge;
 
-    // Log entire charge object to find email field
-    console.log("🔍 DEBUG FULL CHARGE:", JSON.stringify(charge, null, 2));
+    let email = charge.receipt_email;
 
-    const email = charge.receipt_email || (charge.customer as any)?.email;
+    // If no receipt_email, try to fetch from customer
+    if (!email && typeof charge.customer === "string") {
+      try {
+        const customer = await stripe.customers.retrieve(charge.customer);
+        email = customer.email || undefined;
+      } catch (err) {
+        console.error("Failed to fetch customer:", err);
+      }
+    }
 
     console.log(`📧 Processing charge for ${email}`);
 
