@@ -85,7 +85,8 @@ async function sendLicenseEmail(
 }
 
 /**
- * Webhook endpoint for Stripe payment_intent.succeeded events
+ * Webhook endpoint for Stripe checkout.session.completed events
+ * Processes successful payments and issues license keys
  */
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const sig = req.headers.get("stripe-signature");
@@ -117,178 +118,55 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 
+  // Only process checkout.session.completed events
+  if (event.type !== "checkout.session.completed") {
+    return NextResponse.json({ received: true });
+  }
+
   // Handle checkout.session.completed (from Stripe Checkout)
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
+  const session = event.data.object as Stripe.Checkout.Session;
 
-    const email =
-      session.customer_email || session.customer_details?.email || null;
+  const email =
+    session.customer_email || session.customer_details?.email || null;
 
-    console.log(`📧 Processing checkout session for ${email}`);
+  console.log(`📧 Processing checkout session for ${email}`);
 
-    if (!email) {
-      console.error("❌ Checkout session missing customer email");
-      console.error("Session ID:", session.id);
-      return NextResponse.json({ error: "No email found" }, { status: 400 });
-    }
-
-    try {
-      // Generate license key
-      const licenseKey = generateLicenseKey();
-      console.log(`🔑 Generated license key for ${email}`);
-
-      // Send email
-      await sendLicenseEmail(email, licenseKey);
-
-      // Log for debugging
-      console.log(
-        `✅ Success: License key issued`,
-        JSON.stringify(
-          {
-            email,
-            licenseKey,
-            stripeSessionId: session.id,
-            timestamp: new Date().toISOString(),
-          },
-          null,
-          2
-        )
-      );
-
-      return NextResponse.json({ success: true });
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error("❌ Error processing checkout session:", errorMessage);
-      return NextResponse.json(
-        { error: "Failed to process license" },
-        { status: 500 }
-      );
-    }
+  if (!email) {
+    console.error("❌ Checkout session missing customer email");
+    console.error("Session ID:", session.id);
+    return NextResponse.json({ error: "No email found" }, { status: 400 });
   }
 
-  // Handle charge.succeeded (e.g., from stripe charges create)
-  if (event.type === "charge.succeeded") {
-    const charge = event.data.object as Stripe.Charge;
+  try {
+    // Generate license key
+    const licenseKey = generateLicenseKey();
+    console.log(`🔑 Generated license key for ${email}`);
 
-    // Try multiple sources for email
-    let email = charge.receipt_email;
+    // Send email
+    await sendLicenseEmail(email, licenseKey);
 
-    // Try metadata (useful for CLI testing)
-    if (!email && charge.metadata?.email) {
-      email = charge.metadata.email as string;
-    }
+    // Log for debugging
+    console.log(
+      `✅ Success: License key issued`,
+      JSON.stringify(
+        {
+          email,
+          licenseKey,
+          stripeSessionId: session.id,
+          timestamp: new Date().toISOString(),
+        },
+        null,
+        2
+      )
+    );
 
-    // Try to fetch from customer (if exists)
-    if (!email && typeof charge.customer === "string") {
-      try {
-        const customer = await stripe.customers.retrieve(charge.customer);
-        if ("email" in customer && customer.email) {
-          email = customer.email;
-        }
-      } catch (err) {
-        // Customer might not exist, continue
-      }
-    }
-
-    console.log(`📧 Processing charge for ${email}`);
-
-    if (!email) {
-      console.error("❌ Charge missing receipt email");
-      console.error("Charge ID:", charge.id);
-      return NextResponse.json({ error: "No email found" }, { status: 400 });
-    }
-
-    try {
-      // Generate license key
-      const licenseKey = generateLicenseKey();
-      console.log(`🔑 Generated license key for ${email}`);
-
-      // Send email
-      await sendLicenseEmail(email, licenseKey);
-
-      // Log for debugging
-      console.log(
-        `✅ Success: License key issued`,
-        JSON.stringify(
-          {
-            email,
-            licenseKey,
-            stripeChargeId: charge.id,
-            timestamp: new Date().toISOString(),
-          },
-          null,
-          2
-        )
-      );
-
-      return NextResponse.json({ success: true });
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error("❌ Error processing charge:", errorMessage);
-      return NextResponse.json(
-        { error: "Failed to process license" },
-        { status: 500 }
-      );
-    }
+    return NextResponse.json({ success: true });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("❌ Error processing checkout session:", errorMessage);
+    return NextResponse.json(
+      { error: "Failed to process license" },
+      { status: 500 }
+    );
   }
-
-  // Handle payment_intent.succeeded
-  if (event.type === "payment_intent.succeeded") {
-    const paymentIntent = event.data.object as Stripe.PaymentIntent;
-
-    // Debug: Log key fields
-    console.log("🔍 DEBUG PaymentIntent:", {
-      id: paymentIntent.id,
-      receipt_email: paymentIntent.receipt_email,
-      customer_email: (paymentIntent.customer as any)?.email,
-      metadata: paymentIntent.metadata,
-    });
-
-    const email = paymentIntent.receipt_email;
-
-    console.log(`📧 Processing payment for ${email}`);
-
-    if (!email) {
-      console.error("❌ Payment intent missing receipt email");
-      console.error("Payment Intent ID:", paymentIntent.id);
-      return NextResponse.json({ error: "No email found" }, { status: 400 });
-    }
-
-    try {
-      // Generate license key
-      const licenseKey = generateLicenseKey();
-      console.log(`🔑 Generated license key for ${email}`);
-
-      // Send email
-      await sendLicenseEmail(email, licenseKey);
-
-      // Log for debugging (in production, you might store in a database)
-      console.log(
-        `✅ Success: License key issued`,
-        JSON.stringify(
-          {
-            email,
-            licenseKey,
-            stripePaymentId: paymentIntent.id,
-            timestamp: new Date().toISOString(),
-          },
-          null,
-          2
-        )
-      );
-
-      return NextResponse.json({ success: true });
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error("❌ Error processing payment:", errorMessage);
-      return NextResponse.json(
-        { error: "Failed to process license" },
-        { status: 500 }
-      );
-    }
-  }
-
-  // Ignore other event types
-  console.log(`ℹ️ Ignoring event type: ${event.type}`);
-  return NextResponse.json({ received: true });
 }
