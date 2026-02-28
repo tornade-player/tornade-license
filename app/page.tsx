@@ -15,7 +15,7 @@ export default function Home() {
           Webhook endpoint: <code>/api/webhooks/stripe</code>
         </p>
         <p style={{ color: "#999", fontSize: "12px", marginTop: "32px" }}>
-          Configure your Stripe webhook to post <code>payment_intent.succeeded</code> events here.
+          Configure your Stripe webhook to post <code>checkout.session.completed</code> events here.
         </p>
       </div>
     </main>

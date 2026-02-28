@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
-export async function POST(req: NextRequest): Promise<NextResponse> {
+export async function POST(): Promise<NextResponse> {
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: "payment" as const,
+      mode: "payment",
       line_items: [
         {
           price_data: {
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       ],
       success_url: "https://tornade-license.vercel.app/success",
       cancel_url: "https://tornade-license.vercel.app/cancel",
-    } as Parameters<typeof stripe.checkout.sessions.create>[0]);
+    });
 
     console.log(`✅ Checkout session created: ${session.id}`);
     return NextResponse.json({ url: session.url });
