@@ -120,7 +120,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Handle charge.succeeded (e.g., from stripe charges create)
   if (event.type === "charge.succeeded") {
     const charge = event.data.object as Stripe.Charge;
-    const email = charge.receipt_email;
+
+    // Log entire charge object to find email field
+    console.log("🔍 DEBUG FULL CHARGE:", JSON.stringify(charge, null, 2));
+
+    const email = charge.receipt_email || (charge.customer as any)?.email;
 
     console.log(`📧 Processing charge for ${email}`);
 
