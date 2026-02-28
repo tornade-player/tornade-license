@@ -117,6 +117,53 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 
+  // Handle checkout.session.completed (from Stripe Checkout)
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object as Stripe.Checkout.Session;
+    const email = session.customer_email;
+
+    console.log(`📧 Processing checkout session for ${email}`);
+
+    if (!email) {
+      console.error("❌ Checkout session missing customer email");
+      console.error("Session ID:", session.id);
+      return NextResponse.json({ error: "No email found" }, { status: 400 });
+    }
+
+    try {
+      // Generate license key
+      const licenseKey = generateLicenseKey();
+      console.log(`🔑 Generated license key for ${email}`);
+
+      // Send email
+      await sendLicenseEmail(email, licenseKey);
+
+      // Log for debugging
+      console.log(
+        `✅ Success: License key issued`,
+        JSON.stringify(
+          {
+            email,
+            licenseKey,
+            stripeSessionId: session.id,
+            timestamp: new Date().toISOString(),
+          },
+          null,
+          2
+        )
+      );
+
+      return NextResponse.json({ success: true });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error("❌ Error processing checkout session:", errorMessage);
+      return NextResponse.json(
+        { error: "Failed to process license" },
+        { status: 500 }
+      );
+    }
+  }
+
   // Handle charge.succeeded (e.g., from stripe charges create)
   if (event.type === "charge.succeeded") {
     const charge = event.data.object as Stripe.Charge;
