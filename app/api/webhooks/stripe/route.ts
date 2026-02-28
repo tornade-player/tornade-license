@@ -46,7 +46,7 @@ async function sendLicenseEmail(
 
   try {
     await resend.emails.send({
-      from: "Tornade <noreply@tornade.app>",
+      from: "Tornade <noreply@tornade.tf>",
       to: email,
       subject: "Votre clé de licence Tornade",
       html: `
