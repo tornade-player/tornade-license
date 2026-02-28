@@ -22,7 +22,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       ],
       success_url: "https://tornade.app/success",
       cancel_url: "https://tornade.app/cancel",
-      customer_email_collection: "required" as const,
     } as Parameters<typeof stripe.checkout.sessions.create>[0]);
 
     console.log(`✅ Checkout session created: ${session.id}`);
