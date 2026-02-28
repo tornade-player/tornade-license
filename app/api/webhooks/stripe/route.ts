@@ -121,9 +121,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (event.type === "charge.succeeded") {
     const charge = event.data.object as Stripe.Charge;
 
+    // Try multiple sources for email
     let email = charge.receipt_email;
 
-    // If no receipt_email, try to fetch from customer
+    // Try metadata (useful for CLI testing)
+    if (!email && charge.metadata?.email) {
+      email = charge.metadata.email as string;
+    }
+
+    // Try to fetch from customer (if exists)
     if (!email && typeof charge.customer === "string") {
       try {
         const customer = await stripe.customers.retrieve(charge.customer);
@@ -131,7 +137,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           email = customer.email;
         }
       } catch (err) {
-        console.error("Failed to fetch customer:", err);
+        // Customer might not exist, continue
       }
     }
 
