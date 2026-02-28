@@ -20,8 +20,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           quantity: 1,
         },
       ],
-      success_url: "https://tornade.app/success",
-      cancel_url: "https://tornade.app/cancel",
+      success_url: "https://tornade-license.vercel.app/success",
+      cancel_url: "https://tornade-license.vercel.app/cancel",
     } as Parameters<typeof stripe.checkout.sessions.create>[0]);
 
     console.log(`✅ Checkout session created: ${session.id}`);
