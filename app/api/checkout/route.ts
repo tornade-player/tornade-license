@@ -6,8 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card"],
+      mode: "payment" as const,
       line_items: [
         {
           price_data: {
@@ -16,15 +15,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
               name: "Tornade Unlock",
               description: "Unlock Tornade full features",
             },
-            unit_amount: 1999, // $19.99 in cents
+            unit_amount: 1999, // €19.99 in cents
           },
           quantity: 1,
         },
       ],
       success_url: "https://tornade.app/success",
       cancel_url: "https://tornade.app/cancel",
-      customer_email_collection: "required", // ← Forces email input
-    });
+      customer_email_collection: "required" as const,
+    } as Parameters<typeof stripe.checkout.sessions.create>[0]);
 
     console.log(`✅ Checkout session created: ${session.id}`);
     return NextResponse.json({ url: session.url });
