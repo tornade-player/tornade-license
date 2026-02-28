@@ -127,8 +127,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     if (!email && typeof charge.customer === "string") {
       try {
         const customer = await stripe.customers.retrieve(charge.customer);
-        if ("email" in customer) {
-          email = customer.email || undefined;
+        if ("email" in customer && customer.email) {
+          email = customer.email;
         }
       } catch (err) {
         console.error("Failed to fetch customer:", err);
