@@ -48,30 +48,34 @@ async function sendLicenseEmail(
     await resend.emails.send({
       from: "Tornade <noreply@tornade.tf>",
       to: email,
-      subject: "Votre clé de licence Tornade",
+      subject: "Your Tornade License Key",
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2>Merci pour votre achat !</h2>
-          <p>Voici votre clé de licence Tornade. Entrez-la dans l'app pour activer votre copie.</p>
+          <div style="text-align: center; margin-bottom: 32px;">
+            <img src="https://tornade.tf/images/tornade.png" alt="Tornade" style="width: 250px; height: 250px; object-fit: contain;">
+          </div>
 
-          <div style="background: #f5f5f5; border-radius: 8px; padding: 16px; margin: 24px 0;">
+          <h2 style="text-align: center; margin-top: 0;">Thank You for Your Purchase!</h2>
+          <p style="text-align: center; color: #666;">Here is your Tornade license key. Enter it in the app to activate your copy.</p>
+
+          <div style="background: #f5f5f5; border-radius: 8px; padding: 16px; margin: 24px 0; text-align: center;">
             <code style="font-family: 'Menlo', 'Monaco', monospace; font-size: 16px; font-weight: 500; letter-spacing: 2px;">
               ${licenseKey}
             </code>
           </div>
 
-          <p style="color: #666; font-size: 14px;">
-            <strong>Instructions :</strong>
+          <p style="color: #666; font-size: 14px; margin-bottom: 12px;">
+            <strong>How to activate:</strong>
           </p>
-          <ol style="color: #666; font-size: 14px;">
-            <li>Ouvrez Tornade</li>
-            <li>Cliquez sur "Activer la licence"</li>
-            <li>Collez votre clé ci-dessus</li>
-            <li>Profitez de Tornade !</li>
+          <ol style="color: #666; font-size: 14px; margin-left: 20px;">
+            <li>Open Tornade</li>
+            <li>Click "Activate License"</li>
+            <li>Paste your key above</li>
+            <li>Start enjoying Tornade!</li>
           </ol>
 
-          <p style="color: #999; font-size: 12px; margin-top: 32px; border-top: 1px solid #eee; padding-top: 16px;">
-            © 2026 Tornade. Tous droits réservés.
+          <p style="color: #999; font-size: 12px; margin-top: 32px; padding-top: 16px; border-top: 1px solid #eee; text-align: center;">
+            © 2026 Tornade. All rights reserved.
           </p>
         </div>
       `,
