@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tornade appcast — served at https://tornade-license.vercel.app/appcast.xml
+  Sparkle 2.x format: https://sparkle-project.org/documentation/publishing/
+
+  To publish a new release:
+  1. Build the .dmg (or .zip) and sign it:
+       /tmp/sparkle_dist/bin/sign_update /path/to/Tornade-X.Y.Z.dmg
+     Copy the `sparkle:edSignature` value from the output.
+
+  2. Compute the file length:
+       stat -f%z /path/to/Tornade-X.Y.Z.dmg
+
+  3. Add a new <item> block below, filling in:
+       - <title>
+       - <pubDate>  (RFC 2822 — e.g. "Sat, 01 Mar 2026 12:00:00 +0000")
+       - <sparkle:version>  (CFBundleVersion, integer build number)
+       - <sparkle:shortVersionString>  (marketing version, e.g. "1.2.0")
+       - url= in <enclosure>
+       - sparkle:edSignature= from step 1
+       - length= from step 2
+-->
+<rss version="2.0"
+     xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Tornade</title>
+    <link>https://tornade-license.vercel.app/appcast.xml</link>
+    <description>Tornade update feed</description>
+    <language>en</language>
+
+    <!-- ============================================================
+         Latest release — update this block for every new version
+         ============================================================ -->
+    <item>
+      <title>Tornade 1.0.0</title>
+      <pubDate>Sat, 01 Mar 2026 12:00:00 +0000</pubDate>
+      <sparkle:version>1</sparkle:version>
+      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <h3>Tornade 1.0</h3>
+        <ul>
+          <li>Initial release</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/tornade-player/tornade-gui/releases/download/v1.0.0/Tornade-1.0.0.dmg"
+        sparkle:edSignature="REPLACE_WITH_ED_SIGNATURE"
+        length="0"
+        type="application/octet-stream" />
+    </item>
+
+  </channel>
+</rss>
