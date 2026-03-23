@@ -5,20 +5,15 @@
 
   To publish a new release:
   1. Build the .dmg (or .zip) and sign it:
-       /tmp/sparkle_dist/bin/sign_update /path/to/Tornade-X.Y.Z.dmg
+       /path/to/sign_update /path/to/tornade-macos-vX.Y.Z.dmg
      Copy the `sparkle:edSignature` value from the output.
 
-  2. Compute the file length:
-       stat -f%z /path/to/Tornade-X.Y.Z.dmg
+  2. Add a new <item> block below (keep previous ones for delta updates),
+     filling in title, pubDate, sparkle:version, sparkle:shortVersionString,
+     url, sparkle:edSignature, and length.
 
-  3. Add a new <item> block below, filling in:
-       - <title>
-       - <pubDate>  (RFC 2822 — e.g. "Sat, 01 Mar 2026 12:00:00 +0000")
-       - <sparkle:version>  (CFBundleVersion, integer build number)
-       - <sparkle:shortVersionString>  (marketing version, e.g. "1.2.0")
-       - url= in <enclosure>
-       - sparkle:edSignature= from step 1
-       - length= from step 2
+  sign_update is at:
+  ~/Library/Developer/Xcode/DerivedData/Tornade-*/SourcePackages/artifacts/sparkle/Sparkle/bin/sign_update
 -->
 <rss version="2.0"
      xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
@@ -30,24 +25,24 @@
     <language>en</language>
 
     <!-- ============================================================
-         Latest release — update this block for every new version
+         v1.3.0 — 2026-03-23
          ============================================================ -->
     <item>
-      <title>Tornade 1.0.0</title>
-      <pubDate>Sat, 01 Mar 2026 12:00:00 +0000</pubDate>
+      <title>Tornade 1.3.0</title>
+      <pubDate>Sun, 23 Mar 2026 12:00:00 +0000</pubDate>
       <sparkle:version>1</sparkle:version>
-      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
+      <sparkle:shortVersionString>1.3.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
       <description><![CDATA[
-        <h3>Tornade 1.0</h3>
+        <h3>Tornade 1.3.0</h3>
         <ul>
-          <li>Initial release</li>
+          <li>Drag &amp; drop pour réordonner les morceaux dans la queue</li>
         </ul>
       ]]></description>
       <enclosure
-        url="https://github.com/tornade-player/tornade-gui/releases/download/v1.0.0/Tornade-1.0.0.dmg"
-        sparkle:edSignature="REPLACE_WITH_ED_SIGNATURE"
-        length="0"
+        url="https://github.com/tornade-player/tornade-releases/releases/download/v1.3.0/tornade-macos-v1.3.0.dmg"
+        sparkle:edSignature="bsHJcWVwwUf7PPhQFuKkp5jomuqboHCrZshY+kkRGOW8VACazq27IVBnwU7V8PGpaRZ0SXGDijdq7yDQ78XyBg=="
+        length="18694960"
         type="application/octet-stream" />
     </item>
 
