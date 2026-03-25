@@ -25,6 +25,31 @@
     <language>en</language>
 
     <!-- ============================================================
+         v1.5.0 — 2026-03-25
+         ============================================================ -->
+    <item>
+      <title>Tornade 1.5.0</title>
+      <pubDate>Tue, 25 Mar 2026 14:00:00 +0000</pubDate>
+      <sparkle:version>3</sparkle:version>
+      <sparkle:shortVersionString>1.5.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <h3>Tornade 1.5.0</h3>
+        <ul>
+          <li>Correction : la pause fonctionne maintenant de façon fiable</li>
+          <li>Correction : cliquer sur la pochette ouvre bien le détail de l'album</li>
+          <li>Correction : plus de fausse alerte "Could not connect to [NAS]" au démarrage</li>
+          <li>Icône de l'application visible sur l'App Store</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/tornade-player/tornade-releases/releases/download/v1.5.0/Tornade.dmg"
+        sparkle:edSignature="qUlOBnrXGga+73HEbmMrZX9nvm1HlVGm4HIxwY0AfwciyYaUkQChi/7SYNmEjxxtYQWN2PBbClA0kv//oD8yCg=="
+        length="21759253"
+        type="application/octet-stream" />
+    </item>
+
+    <!-- ============================================================
          v1.4.15 — 2026-03-25
          ============================================================ -->
     <item>
