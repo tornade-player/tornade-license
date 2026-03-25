@@ -25,6 +25,29 @@
     <language>en</language>
 
     <!-- ============================================================
+         v1.4.15 — 2026-03-25
+         ============================================================ -->
+    <item>
+      <title>Tornade 1.4.15</title>
+      <pubDate>Tue, 25 Mar 2026 11:00:00 +0000</pubDate>
+      <sparkle:version>2</sparkle:version>
+      <sparkle:shortVersionString>1.4.15</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <h3>Tornade 1.4.15</h3>
+        <ul>
+          <li>Application signée et notarisée (plus besoin de débloquer manuellement)</li>
+          <li>Soumission App Store</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/tornade-player/tornade-releases/releases/download/v1.4.15/Tornade.dmg"
+        sparkle:edSignature="9eazJJtTyZe3SPgZiopfW4VlYvtY3q/3KCal1nUva1hO5ZofuGwmdPFkRkAEHci4T29T/lQpXfcQmCsmmZJcDw=="
+        length="21758903"
+        type="application/octet-stream" />
+    </item>
+
+    <!-- ============================================================
          v1.3.1 — 2026-03-23
          ============================================================ -->
     <item>
