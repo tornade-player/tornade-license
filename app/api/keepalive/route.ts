@@ -7,6 +7,6 @@ const redis = new Redis({
 });
 
 export async function GET(): Promise<NextResponse> {
-  await redis.ping();
+  await redis.set("keepalive", new Date().toISOString());
   return NextResponse.json({ ok: true });
 }
