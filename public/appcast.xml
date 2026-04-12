@@ -25,6 +25,28 @@
     <language>en</language>
 
     <!-- ============================================================
+         v1.5.7 — 2026-04-12
+         ============================================================ -->
+    <item>
+      <title>Tornade 1.5.7</title>
+      <pubDate>Sun, 12 Apr 2026 10:00:00 +0000</pubDate>
+      <sparkle:version>4</sparkle:version>
+      <sparkle:shortVersionString>1.5.7</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <h3>Tornade 1.5.7</h3>
+        <ul>
+          <li>Correction : l'application ne redemande plus la clé d'activation à chaque lancement</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/tornade-player/tornade-releases/releases/download/v1.5.7/Tornade.dmg"
+        sparkle:edSignature="wO9lHrTte0lkdEjsUHNyE/g1vcDSWXW2yjnHKJn+qV+3WaXmRb3fvIoMdDg6rxdvM5Hwlcr5HtmlE2DBcE92Aw=="
+        length="21785107"
+        type="application/octet-stream" />
+    </item>
+
+    <!-- ============================================================
          v1.5.0 — 2026-03-25
          ============================================================ -->
     <item>
