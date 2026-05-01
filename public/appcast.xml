@@ -25,6 +25,31 @@
     <language>en</language>
 
     <!-- ============================================================
+         v1.6.0 — 2026-05-01
+         ============================================================ -->
+    <item>
+      <title>Tornade 1.6.0</title>
+      <pubDate>Thu, 01 May 2026 12:00:00 +0000</pubDate>
+      <sparkle:version>10600</sparkle:version>
+      <sparkle:shortVersionString>1.6.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <h3>Tornade 1.6.0</h3>
+        <ul>
+          <li>Playlist "Imported" : les fichiers ouverts ou glissés dans Tornade sont regroupés dans une playlist dédiée</li>
+          <li>Recherche de genres améliorée : plus rapide et plus précise</li>
+          <li>Reconnexion NAS : boutons Annuler et Fermer ajoutés à la bannière</li>
+          <li>Correction : ouvrir un fichier ne lance plus une seconde instance de l'app</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/tornade-player/tornade-releases/releases/download/v1.6.0/Tornade.dmg"
+        sparkle:edSignature="/VCBNvJmUkyfDxA0OoVtXrbUDswUoCt5wOOJtJEVOtdz+eAEMwj1nU8HjO6egu3g41UDS5OHh71RGHxXzFgeDA=="
+        length="21440536"
+        type="application/octet-stream" />
+    </item>
+
+    <!-- ============================================================
          v1.5.8 — 2026-04-12
          ============================================================ -->
     <item>
