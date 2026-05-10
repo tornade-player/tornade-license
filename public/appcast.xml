@@ -25,6 +25,30 @@
     <language>en</language>
 
     <!-- ============================================================
+         v1.7.0 — 2026-05-10
+         ============================================================ -->
+    <item>
+      <title>Tornade 1.7.0</title>
+      <pubDate>Sat, 10 May 2026 14:30:00 +0000</pubDate>
+      <sparkle:version>10700</sparkle:version>
+      <sparkle:shortVersionString>1.7.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <h3>Tornade 1.7.0</h3>
+        <ul>
+          <li>Editeur de tags : modifier titre, artiste, album, année, genres et pochette directement dans l'app</li>
+          <li>Sélection multiple dans les playlists : déplacer ou supprimer plusieurs morceaux en une fois</li>
+          <li>Lecteur dans la barre de menu : contrôles de lecture accessibles sans ouvrir l'app</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/tornade-player/tornade-releases/releases/download/v1.7.0/Tornade.dmg"
+        sparkle:edSignature="QECTIBJxLuRZomPncOCxIJOoE77OfgHeHzLJaU4Bt2FzBM4juatwKR1D3lr9+sYHIiHNab8jfILdMGzlm7FcDA=="
+        length="22059971"
+        type="application/octet-stream" />
+    </item>
+
+    <!-- ============================================================
          v1.6.0 — 2026-05-01
          ============================================================ -->
     <item>
