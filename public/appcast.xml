@@ -25,6 +25,31 @@
     <language>en</language>
 
     <!-- ============================================================
+         v1.8.0 — 2026-05-17
+         ============================================================ -->
+    <item>
+      <title>Tornade 1.8.0</title>
+      <pubDate>Sat, 17 May 2026 20:28:53 +0000</pubDate>
+      <sparkle:version>10800</sparkle:version>
+      <sparkle:shortVersionString>1.8.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[
+        <h3>Tornade 1.8.0</h3>
+        <ul>
+          <li>Lecteur dans la barre de menu : menu contextuel pour afficher/masquer les infos de piste</li>
+          <li>Double-clic lance la lecture immédiatement</li>
+          <li>Correction : sélection de piste, double-clic, shift-range et drag fiables sur macOS 26</li>
+          <li>Correction : reconnexion NAS réduite à une seule tentative</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/tornade-player/tornade-releases/releases/download/v1.8.0/Tornade.dmg"
+        sparkle:edSignature="ER4q7Xv3JfhCs5zbt5xxhAY7MgeL3uVD4rGNEt21nICTDxI60XTeJNVFlXLFgpJsw4Ep3jMJkGwSD/HKDySpBg=="
+        length="22062770"
+        type="application/octet-stream" />
+    </item>
+
+    <!-- ============================================================
          v1.7.0 — 2026-05-10
          ============================================================ -->
     <item>
